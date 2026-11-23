@@ -4,11 +4,9 @@ import { TRICUSPID_APPARATUS_POSE_ENABLED, tricuspidPoseMatrix } from './tricusp
 import { GLTF_SCALE_MM_PER_UNIT } from './valvarKinematics';
 
 // ============================================================================
-// Procedural RV wall (Phases 3, 3b and 3c of the RV plan)
+// Procedural RV wall geometry
 // ----------------------------------------------------------------------------
-// Diagnosis: DIAGNOSTICO_VD_GEOMETRIA_20261107.md (Sections 3, 4.1 and 5).
-// Reports: VD_FASE3_20261108.md, VD_FASE3B_20261108.md and VD_FASE3C_20261108.md.
-// Reference scale: 34.3 mm/unit (D1).
+// Reference scale: 34.3 mm/unit.
 //
 // Hybrid approach: the RV wall is generated here; the GLB tricuspid apparatus stays the same,
 // repositioned by the rigid pose T_TV of Phase 2 (tricuspidApparatusPose.ts). The geometry of the node

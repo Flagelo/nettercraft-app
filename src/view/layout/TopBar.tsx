@@ -4,6 +4,7 @@ import { CLINICAL_PRESETS } from '../../model/hemodynamics/clinicalPresets';
 import { getLive, usePhysiologyStore, type ViewId } from '../../controller/usePhysiologyStore';
 import { auscultationSynth } from '../../controller/modules/auscultationModule';
 import { useRafLoop } from '../../controller/useRafLoop';
+import { POCUS_ENABLED } from '../pocusModule';
 
 const SESSION_TABS: readonly {
   id: ViewId;
@@ -77,11 +78,16 @@ export function TopBar() {
   };
 
   const handleSwitchModule = (target: ViewId) => {
+    if (!POCUS_ENABLED && target === 'pocus') return;
     if (target !== 'exam_mode' && activeExamCaseId !== null) {
       exitExamMode(false);
     }
     setView(target);
   };
+
+  const visibleTabs = POCUS_ENABLED
+    ? SESSION_TABS
+    : SESSION_TABS.filter((tab) => tab.id !== 'pocus');
 
   return (
     <header>
@@ -98,7 +104,7 @@ export function TopBar() {
           </button>
 
           <nav className="nc-session-tabs" aria-label="Navegação entre Módulos">
-            {SESSION_TABS.map((tab) => {
+            {visibleTabs.map((tab) => {
               const active =
                 view === tab.id || (tab.id === 'exam_mode' && activeExamCaseId !== null);
               return (

@@ -25,8 +25,7 @@ import {
   type LvFieldRig,
 } from './lvContractionField';
 
-// LV Phase 5b — A1-final (λ < 0), N1 (annulus normals), warm-up of the regional path and untwisting tied to filling.
-// VE_FASE5B_20261112.md; criteria in sandbox_nettercraft_ve_20261111\_evidencias\ve5b\CRITERIOS_VE5B.md.
+// LV untwisting tied to filling, negative λ handling, annulus normals, and regional path warm-up.
 
 const Y_TOP = LV_ANALYTIC_PROFILE.y0 + LV_ANALYTIC_PROFILE.height;
 const DEG = 180 / Math.PI;
@@ -55,7 +54,7 @@ async function buildLv(warmRegional = true) {
   return { scene, valvar, ss, lv };
 }
 
-/** Negative λ via the driver path (as in the Codex test): establishes the EDV and then a volume above it. */
+/** Negative λ via the driver path (regression case): establishes the EDV and then a volume above it. */
 function driveNegative(lv: LvFieldRig): void {
   resetLvDriver(lv);
   for (let k = 0; k < 5; k++) updateLvDriver(lv, 120 - 15 * k, 0, k * 0.001);

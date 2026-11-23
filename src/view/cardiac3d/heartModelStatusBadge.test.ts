@@ -3,7 +3,7 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import * as HeartMesh from './HeartMesh17';
 
-// LV Phase 4c (DIAGNOSTICO_VE4C §1): the "Fallback Ativo" label also appeared during the normal GLB load (gltfScene still null), without
+// Regression guard: the "Fallback Ativo" label previously appeared during normal GLB loading (gltfScene still null) without
 // any error. The wireframe badge distinguishes "loading" from "failure". Render test of the badge component with react-dom/server:
 // mounting HeartWireframeFallback/HeartElectromechanicalScene requires the R3F context with WebGL (useFrame, <Html>), unavailable in Node.
 describe('Anatomical wireframe badge (loading × GLB failure)', () => {

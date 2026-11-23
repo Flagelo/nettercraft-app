@@ -25,8 +25,7 @@ import {
   type LvFieldRig,
 } from './lvContractionField';
 
-// LV Phase 5 — torsion (Maharaj 2013, PMID 23053853). VE_FASE5_20261112.md; pre-registered criteria in
-// sandbox_nettercraft_ve_20261111\_evidencias\ve5\CRITERIOS_VE5.md (definition of the measures copied from there unchanged).
+// LV torsion verification (Maharaj 2013, PMID 23053853).
 // Convention: θ = atan2(z, x) in the LV parent space; rotation > 0 = increasing θ = counterclockwise seen from the apex (AR > 0, BR < 0).
 
 const DEG = 180 / Math.PI;
@@ -58,7 +57,7 @@ async function buildLv() {
   return { scene, valvar, ss, lv };
 }
 
-/** (endocardium, epicardium) pairs with the same rest (θ, u) on ring u, one per θ (CRITERIOS_VE5: "Pontos"). */
+/** (endocardium, epicardium) pairs with the same rest (θ, u) on ring u, one per θ. */
 function ringPairs(ss: THREE.Mesh[], u: number): Array<[THREE.Mesh, number, number]> {
   const out: Array<[THREE.Mesh, number, number]> = [];
   const seen = new Set<number>();
@@ -185,7 +184,7 @@ describe('LV Phase 5 — torsion (Maharaj 2013) and untwisting', () => {
       applyLvChordTies(lvRig);
       samples.push({ t: clock.state.t, beat: clock.state.beatIndex, lam: lvRig.lambda, a: ringAngles(pa, true), b: ringAngles(pb, true), kind });
     };
-    // end of rapid filling per beat (CRITERIOS_VE5 §5.4): after the swap, mitral opening (z crosses 0.25 upward), E peak, q ≤ 10 % of E
+    // end of rapid filling per beat: after the swap, mitral opening (z crosses 0.25 upward), E peak, q ≤ 10 % of E
     let sw = lv.tw.switches, phase = 0, zPrev = 0, eMax = 0, beatEr = -1;
     for (let i = 0; i < 10000; i++) {
       clock.step(0.001, cmd());

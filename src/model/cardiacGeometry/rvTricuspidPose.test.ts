@@ -21,7 +21,7 @@ import {
 } from './tricuspidApparatusPose';
 
 // ============================================================================
-// RV Phase 2: rigid T_TV pose of the tricuspid apparatus (report VD_FASE2_20261107.md).
+// Rigid T_TV pose of the tricuspid apparatus.
 // Criteria: 0 apparatus vertices inside the LV epicardium (clearance >= 1 mm @34.3 mm/unit),
 // chordae with unchanged length (<= 1e-6 relative), chorda–papillary ΔG = 0, chorda–leaflet gap and
 // coaptation unchanged, valvar kinematics unchanged in local space, exact reversion flag.

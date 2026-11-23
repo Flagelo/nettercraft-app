@@ -576,7 +576,7 @@ export function RealisticHeartGLB({
     // Replaces the per-node scale; the RV septum now reads the dynamic epicardial envelope of the LV. Without the field (non-watertight
     // geometry or LV_FIELD_ENABLED = false), the per-node scale remains. Revert: LV_FIELD_ENABLED = false.
     // LV Phase 4: the same rig lowers the AV plane (longitudinal component) and carries the mitral apparatus, the LA (skinning), the aortic valve
-    // and the aortic root (DIAGNOSTICO_VE4 §4).
+    // and the aortic root.
     const lvRig = LV_FIELD_ENABLED ? setupLvContractionField(segmentMeshes.map((s) => s.mesh), sceneClone, valvarData, { semilunar: semilunarData, rightAtriumSkin: raSkin }) : null;
     linkRvLvEnvelope(rvRig, lvRig ? lvRig.envelope : null);
 
@@ -1058,7 +1058,7 @@ export function RealisticHeartGLB({
 export type HeartModelStatus = 'loading' | 'failed';
 
 /**
- * LV Phase 4c (DIAGNOSTICO_VE4C §1): the badge said "Fallback Ativo" also during the normal GLB load, with no error at all; it now distinguishes the two cases.
+ * Regression guard: the badge previously showed "Fallback Ativo" during normal GLB loading as well; it now distinguishes loading from failure.
  * Pure component (tested with react-dom/server in heartModelStatusBadge.test.ts).
  */
 export function HeartModelStatusBadge({ status }: { status: HeartModelStatus }) {

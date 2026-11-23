@@ -3,7 +3,6 @@ import * as THREE from 'three';
 // ============================================================================
 // Geometric metrics of the RV and the tricuspid apparatus (pure functions, read-only)
 // ----------------------------------------------------------------------------
-// Diagnosis: DIAGNOSTICO_VD_GEOMETRIA_20261107.md (Sections 2.3 and 2.4).
 // All measurements are in model UNITS, in the world space of the loaded scene (the root group of the
 // GLB has matrixWorld = identity, the same parent space used in rvContractionComponent).
 // Conversion to mm is left to the caller (global scale), so that the tests do not depend on the

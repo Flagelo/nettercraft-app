@@ -854,8 +854,8 @@ describe('RV contraction by volume in 3 components (Kovács 2019; Lakatos 2020)'
     // LV Phase 4 (by definition): with the septum recalibrated (D-VE13) and the LV descent, the contracted LV barely changes the cavity of the
     // RV at this instant (0.397, before > 0.42) and the compensation now reduces λ (0.5519 × 0.5555). What remains is what does not depend on the sign:
     // without compensation the volume leaves the target, and the q(λ, v) table returns it to 0.4.
-    // LV Phase 4c (D-VE22, 60° ramp; adjustment declared in VE_FASE4C_20261112.md): the deviation without compensation dropped from > 0.001 to 0.00057;
-    // the absolute limit 0.001 became the same property in relative form: the compensation changes λ and leaves the volume closer to 0.4.
+    // With 60° septal ramp compensation, the uncompensated deviation is smaller (0.00057 vs > 0.001);
+    // compensation shifts λ and brings the RV cavity volume closer to the 0.4 target.
     expect(Math.abs(semCompensar - 0.4)).toBeGreaterThan(0);
     const lam = rvLambdaFromQ(rig, 0.4);
     expect(lam).not.toBe(lamSemVE);

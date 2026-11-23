@@ -4,7 +4,7 @@ import { lvEnvelopeRadius } from './rvGeometryMetrics';
 // ============================================================================
 // LV metrics (Phase 1, pure functions; read-only; Phase 4d: no function writes a matrix)
 // ----------------------------------------------------------------------------
-// Diagnosis: VE_FASE0_DIAGNOSTICO_20261111.md (Sections 1–2).
+// Pure read-only LV geometric metrics (no function mutates a node matrix).
 // Space: that of the wedges' parent (GLB root, matrixWorld = identity), via each node's `mesh.matrix`,
 // as in measureLvCavityVolume. LV axis = y axis (x = z = 0). Model units; conversion
 // to mm (34.3 mm/u) is left to the caller.
@@ -24,7 +24,7 @@ export const LV_AHA_WEDGES: ReadonlyArray<{ id: number; nu0: number; nu1: number
 const LOCAL_M = new THREE.Matrix4();
 
 /**
-  * Local matrix of a node WITHOUT writing to it (LV Phase 4d, finding A3 of the Codex review): with `matrixAutoUpdate = true`, the current TRS
+  * Local matrix of a node WITHOUT writing to it (regression case A3): with `matrixAutoUpdate = true`, the current TRS
   * composed into a scratch matrix (the rig may have changed `position` without `updateMatrix`); with `false`, the matrix written by the rig (RV, tricuspid
   * apparatus), as is. Before, `mesh.updateMatrix()` recomposed the tricuspid apparatus matrix from the static pose (up to 21.7 mm).
  */

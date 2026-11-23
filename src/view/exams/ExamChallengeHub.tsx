@@ -14,6 +14,7 @@ import {
 import { useState } from 'react';
 import { usePhysiologyStore } from '../../controller/usePhysiologyStore';
 import { EXAM_CASES, type ExamCase } from '../../model/exams/examCases';
+import { POCUS_ENABLED } from '../pocusModule';
 
 /**
  * Step 1 — ExamChallengeHub Gallery ('netter-artcraft-ui-shell'):
@@ -39,12 +40,17 @@ export function ExamChallengeHub() {
     },
   ];
 
+  const availableCases = POCUS_ENABLED
+    ? EXAM_CASES
+    : EXAM_CASES.filter((c) => c.targetView !== 'pocus');
+
   const filteredCases =
     selectedCategory === 'ALL'
-      ? EXAM_CASES
-      : EXAM_CASES.filter((c) => c.category === selectedCategory);
+      ? availableCases
+      : availableCases.filter((c) => c.category === selectedCategory);
 
   const handleStartCase = (exam: ExamCase) => {
+    if (!POCUS_ENABLED && exam.targetView === 'pocus') return;
     startExamCase({
       caseId: exam.id,
       targetView: exam.targetView,

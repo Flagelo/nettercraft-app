@@ -5,7 +5,7 @@ import { LV_AHA_WEDGES } from './lvMetrics';
 // ============================================================================
 // LV — Phase 2: watertight rest geometry of the 17 wedges (approach C, D-VE1)
 // ----------------------------------------------------------------------------
-// Report: VE_FASE1_2_20261111.md. Diagnosis: VE_FASE0_DIAGNOSTICO_20261111.md.
+// Watertight rest geometry of the 17 LV wedges.
 // Keeps the 17 GLB nodes (name, material, userData.segId, selection, color, valve mode); only `mesh.geometry`
 // changes, in memory, at load. The GLB is not modified.
 //  - Common global θ grid of LV_GRID_DTHETA_DEG (multiple of 15°: covers the 60° boundaries of the

@@ -49,8 +49,7 @@ import {
 } from './lvContractionField';
 import { atrialContractionScale, setupAtrialSkinning, applyAtrialSkinning, RA_ANCHORS } from './atrialSkinning';
 
-// LV Phase 3 — VE_FASE3_20261111.md (pre-registered criteria in
-// sandbox_nettercraft_ve_20261111\_evidencias\ve3\CRITERIOS_VE3.md). Declared scale: 34.3 mm/u.
+// LV radial + longitudinal contraction calibrated by volume. Declared scale: 34.3 mm/u.
 const S = 34.3;
 const W = RV_COMPONENT_WEIGHTS;
 const G = RV_RIG_GAINS;
@@ -430,7 +429,7 @@ describe('LV Phase 4 — longitudinal component, septum and AV plane (criteria i
   });
 });
 
-// ---------- LV Phase 4b: LA, apparatus with regional motility and chordae (criteria in _evidencias\ve4b\CRITERIOS_VE4B.md) ----------
+// ---------- LV longitudinal coupling: LA, apparatus with regional motility, and chordae ----------
 
 const SCEN_4B: Array<[string, (i: number) => number]> = [
   ['wm1', () => 1],
@@ -488,12 +487,11 @@ describe('LV Phase 4b — LA, regional mitral apparatus and chordae', () => {
   });
 });
 
-// ---------- LV Phase 4c: RA outside the LV (D-VE24) and LA–annulus gap with the local top (D-VE21); criteria in _evidencias\ve4c\CRITERIOS_VE4C.md ----------
+// ---------- LV-RA clearance and LA–annulus gap with local top coupling ----------
 
 /**
- * Phase 4c world: that of buildVe3World + RA skinning (as in HeartMesh17) passed to the LV rig (RA post-step).
- * LV Phase 4d (declared change in VE_FASE4D_20261112.md): the RA uses RA_SKIN_PARAMS_LV, as in HeartMesh17 (floor pulled back to the tricuspid
- * plane at load); the limits of test 4c.4/4c.5 do not change.
+ * World builder: buildVe3World + RA skinning (as in HeartMesh17) passed to the LV rig (RA post-step).
+ * Uses RA_SKIN_PARAMS_LV as in HeartMesh17 (floor pulled back to the tricuspid plane at load).
  */
 async function buildVe4cWorld() {
   const scene = await loadGlbScene();
@@ -577,8 +575,8 @@ function laAnnulusSectors(w: Ve3World, la: THREE.Mesh): number[] {
 }
 
 describe('LV Phase 4c — RA outside the LV (D-VE24) and local top of the mitral apparatus (D-VE21)', () => {
-  // The LA–annulus gap in the 3 regional scenarios does NOT enter here: criterion 4c.4 failed in those scenarios (0.68 / 0.94 / 0.88 mm; VE_FASE4C_20261112.md)
-  // and a red test records nothing beyond the report. What remains is the gap at rest and at wm1 (≤ 0.5 mm), which passes.
+  // Regional scenarios are excluded here because their LA–annulus gap exceeds 0.5 mm (0.68 / 0.94 / 0.88 mm);
+  // this test verifies the rest and baseline wm1 gap (≤ 0.5 mm).
   it('4c.4/4c.5: RA with 0 vertices inside the LV and in the wall at rest and in the 4 scenarios; LA outside the LV and the RA; LA–annulus gap ≤ 0.5 mm at wm1', { timeout: 300000 }, async () => {
     const { w, raSkin, ra, la } = await buildVe4cWorld();
     const pose = (lam: number, rvQ: number | null) => {

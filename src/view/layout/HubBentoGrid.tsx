@@ -9,6 +9,7 @@ import {
 } from '../../controller/usePhysiologyStore';
 import { AHA_SEGMENT_TERRITORY, type WallMotionScore } from '../../model/contracts/types';
 import { EXAM_CASES } from '../../model/exams/examCases';
+import { POCUS_ENABLED } from '../pocusModule';
 
 type FilterTabId = 'all' | 'simulators' | 'exams' | 'presets';
 type SortMode = 'suite' | 'alpha' | 'module';
@@ -99,11 +100,16 @@ export function HubBentoGrid() {
 
   // PocusCraft quick presets
   const launchPocusScenario = (scenario: PocusScenarioId) => {
+    if (!POCUS_ENABLED) return;
     setPocusScenario(scenario);
     setView('pocus');
   };
 
-  const modules: ModuleCardSpec[] = [
+  const visibleExamCases = POCUS_ENABLED
+    ? EXAM_CASES
+    : EXAM_CASES.filter((ec) => ec.targetView !== 'pocus');
+
+  const allModules: ModuleCardSpec[] = [
     {
       num: '01',
       id: 'cardio',
@@ -227,12 +233,12 @@ export function HubBentoGrid() {
       color: '#F59E0B',
       prefix: 'Exam',
       subtitle: 'Simulados práticos ENARE & SES-PE (DiSSS Recall)',
-      badges: ['INSTALADO', '5 ESTAÇÕES ATIVAS'],
+      badges: ['INSTALADO', `${visibleExamCases.length} ESTAÇÕES ATIVAS`],
       versionLine: 'Versão 2.4.0 · Motor Fisiológico 60 FPS',
       guidelineLabel: 'ENARE / SES-PE ↗',
       docsLabel: 'DOCS ↗',
       keywords: 'examcraft provas residencia enare ses-pe trauma cardiologia disss recall',
-      actions: EXAM_CASES.map((ec) => ({
+      actions: visibleExamCases.map((ec) => ({
         label: ec.title,
         tag: ec.board,
         onSelect: () =>
@@ -249,6 +255,10 @@ export function HubBentoGrid() {
       })),
     },
   ];
+
+  const modules = POCUS_ENABLED
+    ? allModules
+    : allModules.filter((m) => m.id !== 'pocus');
 
   const qNorm = searchQuery.trim().toLowerCase();
 
@@ -320,7 +330,7 @@ export function HubBentoGrid() {
             onClick={() => setFilterTab('all')}
           >
             <span>TODOS</span>
-            <span className="artcraft-filter-count">4</span>
+            <span className="artcraft-filter-count">{modules.length}</span>
           </button>
           <button
             type="button"
@@ -328,7 +338,9 @@ export function HubBentoGrid() {
             onClick={() => setFilterTab('simulators')}
           >
             <span>SIMULADORES</span>
-            <span className="artcraft-filter-count">3</span>
+            <span className="artcraft-filter-count">
+              {modules.filter((m) => m.category === 'simulator').length}
+            </span>
           </button>
           <button
             type="button"
@@ -336,7 +348,9 @@ export function HubBentoGrid() {
             onClick={() => setFilterTab('exams')}
           >
             <span>PROVAS &amp; CASOS</span>
-            <span className="artcraft-filter-count">1</span>
+            <span className="artcraft-filter-count">
+              {modules.filter((m) => m.category === 'exam').length}
+            </span>
           </button>
           <button
             type="button"

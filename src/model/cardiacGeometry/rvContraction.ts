@@ -36,7 +36,7 @@ import { createLvEpiEnvelope, fillLvEpiEnvelopeUniform, lvEnvelopeShrink, lvEnve
 //    Since the transform is affine and the septal plane is invariant, the mesh cavity volume
 //    scales exactly by the determinant Π(1 − k_i).
 //
-// Phase 4 (procedural wall; report VD_FASE4_20261108.md):
+// Procedural RV wall coupling:
 //  - explicit references: apex = geometry.userData.rvApex; annulus = center of the annulus ALREADY posed by T_TV;
 //  - per-vertex weights from `septalWeight`: the free wall receives the 3 components in cylindrical
 //    coordinates (θ, y, f) around the LV axis, with f ≥ ε: no vertex enters the LV, by construction;
@@ -45,7 +45,7 @@ import { createLvEpiEnvelope, fillLvEpiEnvelopeUniform, lvEnvelopeShrink, lvEnve
 //  - papillary bases: local skinning (they follow the wall or, for the septal one, the sliding septum).
 //  Revert: RV_PROCEDURAL_ENABLED = false returns the GLB mesh, which uses the affine deformation below.
 //
-// Phase 4b (report VD_FASE4B_20261108.md; PubMed values, DOIs in the constants):
+// Non-rigid annulus, sliding septum, and papillary kinematics (literature values with DOIs in constants):
 //  - NON-rigid annulus: affine field Δ(x) along the septal → lateral chord (ρ at the septal point, 1 at the lateral), with deviation α only
 //    on the septal side. Applied to the node MATRIX (annulus, leaflets, chordae), because valvarKinematicsComponent rewrites the local
 //    positions of leaflets and chordae every frame; the wall edge uses the same Δ(x), so the annulus–wall gap stays ≈ 0;
@@ -53,7 +53,7 @@ import { createLvEpiEnvelope, fillLvEpiEnvelopeUniform, lvEnvelopeShrink, lvEnve
 //  - papillary muscles: base attached to the wall (skinning); tip = base + (1 − s)·L0 in the direction that follows the annulus; body interpolated;
 //  - chordae: the leaflet end follows Δ(x), the papillary end follows the tip; length varies only in systole.
 //
-// Phase 4c (report VD_FASE4C_20261108.md):
+// Chordal tie-rod constraints:
 //  - chordae as tie rods: interval constraints (±RV_LEAFLET_RIG.maxChordStrain of the length with the valve closed), solved by
 //    iterative projection over a single continuous Gaussian field across the three leaflets (zero at the hinge, same weight as the valvar kinematics).
 //    A chorda within range needs no correction; the smooth field carries the neighboring leaflet along, which avoids crumpling the coaptation edge;
@@ -71,7 +71,7 @@ export const RV_COMPONENT_WEIGHTS = {
 const RV_MIN_STROKE_ML = 2;
 
 /**
- * LV Phase 5c (D-VE34; DIAGNOSTICO_VE5C §5): capacity of the running-maximum trace per beat (samples). At 1 ms it covers an RR of 4 s;
+ * Capacity of the running-maximum RV volume trace per beat (samples). At 1 ms it covers an RR of 4 s;
  * after that the trace stops growing and the query uses the last sample.
  */
 const RV_TRACE_N = 4096;
@@ -230,9 +230,9 @@ const RV_PAPILLARY_TIP_LV_MARGIN = 2 / GLTF_SCALE_MM_PER_UNIT;
 const RV_SLIDE_HORN_RAMP = 0.25;
 
 /**
- * Phase 4b: fraction of the relative annulus − base displacement that orients the papillary tip (small rotation). Design parameter, no
- * reference. LV Phase 4b (D-VE14 v3): 1 → 0.8699, by bisection for the systolic tenting = 3.03 mm (q = 0.4; v = λ_ES·1.008) with the LV
- * descent (DIAGNOSTICO_VE4B §5; Topilsky 2012 3.5 ± 1.0 mm, RELATO). Does not change rest (3.951 mm).
+ * Fraction of the relative annulus − base displacement that orients the papillary tip (small rotation). Design parameter, no
+ * reference. Calibrated to 0.8699 by bisection for systolic tenting = 3.03 mm (q = 0.4; v = λ_ES·1.008) with LV
+ * descent (Topilsky 2012 reports 3.5 ± 1.0 mm). Does not change rest (3.951 mm).
  */
 export const RV_PAPILLARY_TIP_FOLLOW = 0.8699;
 
@@ -1044,7 +1044,7 @@ function evaluateWall(wall: RvWallRig, kL: number, kR: number, kAP: number): voi
       cur[i3] = rr * c - uLv * eux;
       cur[i3 + 1] = y - uLv * euy;
       cur[i3 + 2] = rr * s - uLv * euz;
-      // LV Phase 5d (A1): same as the endocardium (vertex 9067 of the Codex witnesses is in this branch, with lvGuard = 0)
+      // Boundary case: same projection as the endocardium (even when lvGuard = 0 near the contact seam)
       const g = g0 || (lvOn && rr - rE2 < Math.abs(uLv) * (eH + eV) + gSlack);
       if (g) {
         if (uLv === 0 && wLv !== 0) guardLvFast(wall, cur, i3, y, rr, c, s, rE2 - sh + RV_LV_GUARD_MARGIN, th);

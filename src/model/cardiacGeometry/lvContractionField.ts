@@ -6,11 +6,9 @@ import type { ValvarKinematicsData, ChordaBinding } from './valvarKinematics';
 import { setupAtrialSkinning, applyAtrialSkinning, RA_SKIN_PARAMS, type AtrialSkinRig, type AtrialSkinParams } from './atrialSkinning';
 
 // ============================================================================
-// LV — Phases 3 and 4: radial + longitudinal contraction per vertex, calibrated by volume
+// LV radial + longitudinal contraction per vertex, calibrated by volume
 // ----------------------------------------------------------------------------
-// Reports: VE_FASE3_20261111.md and VE_FASE4_20261111.md. Diagnostics (written before the code):
-// sandbox_nettercraft_ve_20261111\_evidencias\ve3\DIAGNOSTICO_VE3.md e ve4\DIAGNOSTICO_VE4.md.
-// Rest coordinates (θ, u) of each vertex (u = rest y). Twist: Phase 5 (VE_FASE5_20261112.md; see the "Phase 5" block below).
+// Rest coordinates (θ, u) of each vertex (u = rest y). Twist: see the twist section below.
 //  - Endocardium: ρ_n² = R_n(u)²·(1 − λ·c_n), c_n = c·m, m = 1 − k·window (septal attenuation, D-VE13).
 //  - Epicardium: ρ_p² = ρ_n² + W0/(1 − κλc), W0 = R_p² − R_n² + λR_n²[c_n − (1 − s)(c_n + β c_n⁺)], s = S·window (D-VE4),
 //    β(u) from per-slice conservation; the factor 1/(1 − κλc) returns to the slice the area that longitudinal compression removes (mass).
@@ -22,23 +20,22 @@ import { setupAtrialSkinning, applyAtrialSkinning, RA_SKIN_PARAMS, type AtrialSk
 //  - Epicardial envelope (144 θ × 88 y) at the CURRENT y, for the RV; current endocardial grid for the papillary muscles.
 //  - Mitral apparatus (annulus, leaflets, 12 chordae): rigid translation of the AV plane (descent + toward the axis), in the node matrix.
 //    Papillary muscles: base on the wall, tip with the apparatus; tip y solved to keep the chordae length (tethers).
-//  - LA: Phase 4d skinning with the apparatus field. Aortic valve: descent in y; aortic root by local skinning.
-//  - Phase 4b (VE_FASE4B_20261111.md; DIAGNOSTICO_VE4B.md): LA without anchor on the RA and floor collapsed to the annulus plane under
-//    load (D-VE17), with a floor at the current top of the LV and contact with the RA in a post-step; table λ → apparatus translation correction on the
-//    c_i change (D-VE18); papillary tip = apparatus, chordae at the rest LV length (D-VE19); 30° septal ramp (D-VE20).
+//  - LA: skinning coupled to the apparatus field. Aortic valve: descent in y; aortic root by local skinning.
+//  - LA floor rises to the annulus plane under load, with floor at current LV top and RA contact post-step;
+//    table λ → apparatus translation correction on c_i change; papillary tip = apparatus, chordae at rest LV length; 30° septal ramp.
 // No per-frame allocation. Revert: LV_FIELD_ENABLED = false (back to per-node scaling); LV_LONG_KAPPA = 0 turns Phase 4 off.
 // ============================================================================
 
 export const LV_FIELD_ENABLED = true;
-/** Maximum epicardial fixation fraction at the RV contact (DIAGNOSTICO_VE4 §3: S = 0.20). */
+/** Maximum epicardial fixation fraction at the RV contact (S = 0.20). */
 export const LV_SEPTAL_FIX_MAX = 0.2;
-/** Attenuation of radial endocardial motion in the septal window (DIAGNOSTICO_VE4 §3: k = 0.30). */
+/** Attenuation of radial endocardial motion in the septal window (k = 0.30). */
 export const LV_SEPTAL_ENDO_ATTEN = 0.3;
-/** Longitudinal gain κ: s_L = κλ (c = 1). DIAGNOSTICO_VE4 §3: MAPSE target 8.838 mm at λ_ES. */
+/** Longitudinal gain κ: s_L = κλ (c = 1); calibrated to MAPSE target 8.838 mm at λ_ES. */
 export const LV_LONG_KAPPA = 0.16806;
-/** MAPSE target (Carlsson 2007, 60 % of the SV) on the watertight mesh: 0.25767 u = 8.838 mm (DIAGNOSTICO_VE4 §1). */
+/** MAPSE target (Carlsson 2007, 60 % of the SV) on the watertight mesh: 0.25767 u = 8.838 mm. */
 export const LV_MAPSE_TARGET_U = 0.25767;
-/** Gain of the mitral apparatus translation toward the axis: |u_h| = g·(1 − f), f = √(1 − λ c_n) at the annulus center (DIAGNOSTICO_VE4 §4). */
+/** Gain of the mitral apparatus translation toward the axis: |u_h| = g·(1 − f), f = √(1 − λ c_n) at the annulus center. */
 export const LV_APPARATUS_INWARD_GAIN = 0.41578;
 /** Half-width of the c-field transitions between segments: θ (degrees) and ν. */
 export const LV_C_THETA_HALF_DEG = 15;
@@ -58,17 +55,16 @@ const LV_REF_TAU_S = 1.5;
 const LV_MIN_STROKE_ML = 2;
 /** Safety margin of the mitral papillary muscles from the current endocardium (u ≈ 0.017 mm). */
 export const LV_PAPILLARY_WALL_MARGIN = 0.0005;
-/** Aortic root: weight 1 up to 5 mm above the base and 0 at 20 mm (DIAGNOSTICO_VE4 §4). */
+/** Aortic root: weight 1 up to 5 mm above the base and 0 at 20 mm. */
 export const LV_AORTA_ROOT_MM: readonly [number, number] = [5, 20];
 /**
- * LA: RA parameters (Phase 4d), without the static LV epicardium lock. Phase 4b (D-VE17): no anchor on the RA; the floor below the
- * annulus plane rises to the plane under load (radial weight 1 up to 6 mm from the annulus contour, 0 at 18 mm; DIAGNOSTICO_VE4B §1).
+ * LA: RA skinning parameters without the static LV epicardium lock; no anchor on the RA, and the floor below the
+ * annulus plane rises to the plane under load (radial weight 1 up to 6 mm from the annulus contour, 0 at 18 mm).
  */
 export const LA_SKIN_PARAMS: AtrialSkinParams = { ...RA_SKIN_PARAMS, lvMargin: -1e6, floorToPlane: [6, 18] };
 /**
- * Phase 4d (user decision, as D-VE17): RA with the floor below the tricuspid plane collapsed to the plane UNDER LOAD. Radial weight 1 up to
- * 18 mm from the annulus contour (floor depth, "model artifact" in atrialSkinningComponent) and 0 at 30 mm (12 mm transition,
- * as in the LA). DIAGNOSTICO_VE4D §4: smallest measured band that takes the RA off the LV at rest without the post-step.
+ * RA with the floor below the tricuspid plane collapsed to the plane under load. Radial weight 1 up to
+ * 18 mm from the annulus contour and 0 at 30 mm (12 mm transition, matching LA; smallest measured band clearing RA from LV at rest).
  */
 export const RA_SKIN_PARAMS_LV: AtrialSkinParams = { ...RA_SKIN_PARAMS, floorToPlane: [18, 30] };
 /** LA, per-frame post-step: floor at the current top of the LV (u margin) inside the top epicardium (+ u tolerance). */
@@ -90,15 +86,14 @@ const LV_EXACT_BAND = 0.02;
 /** Maximum measured grid error (0.011 u) rounded up: extra table margin before the exact check. */
 const LV_EXACT_GRID_ERR = 0.012;
 
-/** Measured RV–LV contact (lvFollow > 0.5; _evidencias\ve3\sonda_contato_vd.txt): y, start and end θ (degrees). */
+/** Measured RV–LV contact (lvFollow > 0.5): y, start and end θ (degrees). */
 const LV_RV_CONTACT: ReadonlyArray<readonly [number, number, number]> = [
   [-1.25, 102, 190], [-1.15, 88, 204], [-1.05, 82, 213], [-0.95, 77, 217], [-0.85, 75, 219], [-0.75, 73, 220],
   [-0.65, 72, 221], [-0.05, 72, 220], [0.05, 72, 217], [0.15, 72, 211], [0.25, 72, 204], [0.35, 75, 197],
   [0.45, 89, 190], [0.55, 113, 179], [0.65, 136, 176], [0.75, 149, 175],
 ];
 /**
- * Width of the septal window ramp (degrees). Phase 4b (D-VE20): 15° → 30° = full width of the c-field transitions (2 × 15°).
- * Phase 4c (D-VE22): 30° → 60°, pre-registered (CRITERIOS_VE4C.md); κ is not recalibrated.
+ * Width of the septal window ramp (degrees): 60° full width (expanded from 30° without recalibrating κ).
  */
 export const LV_SEPTAL_TAPER_DEG = 60;
 /** Phase 4c (D-VE21): guard of the local top field near the LV axis (mm): 0 up to 1 mm, 1 from 3 mm (no apparatus vertex at < 3.2 mm). */
@@ -122,7 +117,7 @@ const TWO_PI = 2 * Math.PI;
 
 const MITRAL_APPARATUS_RE = /^mitral_(annulus|anterior_leaflet|posterior_leaflet|(anterolateral|posteromedial)_chorda_\d+)$/;
 
-// ---------- Phase 5: twist (Maharaj 2013, PMID 23053853; DIAGNOSTICO_VE5.md, CRITERIOS_VE5.md) ----------
+// ---------- LV twist (Maharaj 2013, PMID 23053853) ----------
 // φ(u, λ) = T·w_c(ν)·Φ(ν) about the LV y axis; φ > 0 = increasing θ = counterclockwise seen from the apex (AR > 0, BR < 0).
 // Φ(ν) = Φ_A + (Φ_B − Φ_A)·smoothstep(ν_A, ν_B, ν), constant outside [ν_A, ν_B] (rigid apical cap and base).
 // u estimated from the CURRENT y (inversion with c ≡ 1): φ is a function of y only, the same for all envelope consumers.
@@ -138,11 +133,11 @@ export const LV_TWIST_NU_APICAL = 0.25;
 export const LV_TWIST_NU_BASAL = 0.84;
 /**
  * Untwisting without the engine signals (or without a reference from the previous beat): T = T_sw·(1 − smoothstep(0, T_u, t − t_sw)), T_u (s).
- * Design decision (DIAGNOSTICO_VE5 §5). Phase 5b (D-VE28): with the engine's zMitral and qMitral the event profile below applies.
+ * With the engine's zMitral and qMitral, the event-driven profile below applies.
  */
 export const LV_UNTWIST_S = 0.2;
 /**
- * Phase 5b (D-VE28; DIAGNOSTICO_VE5B §5.1): untwisting tied to filling. Untwisted fraction U; T = T_sw·(1 − U).
+ * Event-driven untwisting tied to filling. Untwisted fraction U; T = T_sw·(1 − U).
  *  - IVR (end of ejection → mitral opening): U = LV_UNTWIST_IVR_FRACTION·smoothstep(0, D_riv, t − t_fim); t_fim = last step in which λ
  *    rose before the switch; D_riv = IVR measured in the previous beat
  *    (initial LV_UNTWIST_IVR_DEFAULT_S). 0.42 = untwisting/twist ratio in the IVR of Maufrais 2014 (PMID 25127983), by definition.
@@ -157,7 +152,7 @@ export const LV_UNTWIST_VALVE_Z = 0.25;
 /** Smallest ΔV_E (mL) accepted as a reference (below that the time profile applies). */
 const LV_UNTWIST_MIN_DV = 1e-3;
 /**
- * Phase 5c (D-VE33; DIAGNOSTICO_VE5C §4): engine-event path, active when the driver receives a finite zAortic (7th argument; the
+ * Engine-event untwisting path, active when the driver receives a finite zAortic (7th argument; the
  * 1 ms step system passes it). Switch at aortic closure (zAortic crosses LV_UNTWIST_VALVE_Z downward, interpolated instant), without
  * waiting for the λ plateau; an ejection that crosses the beat turnover postpones the reference of the next systole; T never falls faster than
  * LV_UNTWIST_MAX_RATE: mean + 2 SD of the peak resting untwisting velocity of Doucende 2010 (PMID 20581049; −88.7 ± 34.2 °/s),
@@ -190,7 +185,7 @@ function nuOf(y: number): number {
 }
 
 /**
- * Phase 5b (A1-final; DIAGNOSTICO_VE5B §1.3, B1): effective longitudinal gain κ·max(λ, 0). The longitudinal component acts only in contraction;
+ * Effective longitudinal gain κ·max(λ, 0). The longitudinal component acts only in contraction;
  * with λ < 0 (LV above the reference volume) the field is radial only and the base NEVER rises above the rest top (Y_TOP), which is what
  * all envelope consumers assume (y grid ∈ [y0, Y_TOP], RV guard, tricuspid papillary muscles, RA and LA post-steps).
  * Revert: return κ·λ.
@@ -442,7 +437,7 @@ export interface LvEpiEnvelope {
   topCol: Float64Array;
   /**
    * Phase 4d (A1): largest excess (u, ≥ 0) of the TRIANGULATED epicardial mesh over the grid (R_p − recession), per λ node × current y band ×
-   * 5° column, built at the c_i change (DIAGNOSTICO_VE4D §1.3). null = no mesh (analytic only: the RV's own envelopes and scratch).
+   * 5° column, built at the c_i change. null = no mesh (analytic only: the RV's own envelopes and scratch).
    */
   divTab: Float32Array | null;
   divStep: number;
@@ -480,7 +475,7 @@ const DIV_NJ = 72;
 const DIV_NK = 44;
 const DIV_DY = (Y_TOP - Y0) / DIV_NK;
 const DIV_DTH = TWO_PI / DIV_NJ;
-/** Sampling margin added to the divergence (u ≈ 0.1 mm; CRITERIOS_VE4D). */
+/** Sampling margin added to the divergence (u ≈ 0.1 mm). */
 export const LV_MESH_DIV_SLACK = 0.003;
 /** Phase 5 (declared deviation): fraction of the 5° column next to the edge (0.25°) in which the sample also counts for the neighboring column. */
 const DIV_EDGE_FRAC = 0.05;
@@ -1270,8 +1265,8 @@ const LV_WARM_MOTION: ReadonlyArray<number> = [1, 1, 0, 1, 0.45, 1, 1, 1, 1, -0.
 const LV_WARM_LAMBDA = 0.6;
 
 /**
- * Phase 5b (D-VE27; DIAGNOSTICO_VE5B §4): the 1st regional switch cost ~30 ms extra because of still-cold code (JIT of the regional branches).
- * At load: switches to a mixed vector, one flush at λ = 0.6 (local top, annulus normals, exact papillary radius) and back to wm1 at
+ * Pre-warms the regional contraction path at load (the first regional switch otherwise incurs ~30 ms JIT overhead):
+ * switches to a mixed vector, one flush at λ = 0.6 (local top, annulus normals, exact papillary radius) and back to wm1 at
  * λ = 0. The final state is the same as a rig without warm-up (lvPhase5b test). Allocates (load).
  */
 export function warmLvRegionalPath(rig: LvFieldRig): void {
@@ -1489,8 +1484,8 @@ export function lvLambdaFromQ(rig: LvFieldRig, q: number): number {
 }
 
 /**
- * Sets λ directly (tests and probes). LV Phase 4d (finding A2): λ clamped to [0, λmax of the scenario] (mass departs by ±0.1 % above λmax;
- * DIAGNOSTICO_VE4D §2) and non-finite input ignored (the previous λ stays). The driver (updateLvDriver) stays within the table range.
+ * Sets λ directly (tests and probes). λ is clamped to [0, λmax of the scenario] (mass departs by ±0.1 % above λmax)
+ * and non-finite input is ignored (the previous λ stays). The driver (updateLvDriver) stays within the table range.
  */
 export function setLvLambda(rig: LvFieldRig, lambda: number): void {
   if (!Number.isFinite(lambda)) return;
@@ -1502,7 +1497,7 @@ export function setLvLambda(rig: LvFieldRig, lambda: number): void {
 }
 
 /**
- * Phase 5: temporal amplitude T of the twist in the driver (DIAGNOSTICO_VE5 §5). Systole: T = (λ − λ_min,beat)/λ_ES,nom (or the untwisting of the
+ * Temporal amplitude T of the twist in the driver. Systole: T = (λ − λ_min,beat)/λ_ES,nom (or the untwisting of the
  * previous beat, if larger); switch at the λ plateau (armed with Δλ ≥ LV_TWIST_ARM).
  * Phase 5b (D-VE28): event-driven untwisting (IVR → mitral opening → filling) when the driver receives finite zMitral and qMitral and the ΔV_E of the
  * previous beat already exists; otherwise, T_sw·(1 − smoothstep(0, T_u, t − t_sw)) as in Phase 5. The untwisting machine does not depend on
@@ -1581,7 +1576,7 @@ function openUntwist(tw: TwistDrive, T: number, t: number, tEnd: number, sig: bo
 }
 
 /**
- * Phase 5c (D-VE33; DIAGNOSTICO_VE5C §4): T from the engine-event path (called at every 1 ms step by the LV system).
+ * T from the engine-event path (called at every 1 ms step by the LV system).
  *  - E1: switch at aortic closure (zAortic crosses LV_UNTWIST_VALVE_Z downward, instant interpolated between steps); U starts at 0
  *    at that instant, so T does not jump (in 5b the anchor sat 20–34 ms in the past and T dropped ~8 % in one step);
  *  - E2: beat turnover with the aortic valve open and no switch (ejection crossing the turnover, high HR) postpones the reference of the next systole
@@ -1765,7 +1760,7 @@ export interface LvDriverSystem {
 let lvDriverSystemCount = 0;
 
 /**
- * Phase 5c (D-VE33; DIAGNOSTICO_VE5C §1): simulation-loop system (order 15, after the hemodynamic engine) that runs the LV driver
+ * Simulation-loop system (order 15, after the hemodynamic engine) that runs the LV driver
  * at every 1 ms step with the engine signals (vLV, zMitral, qMitral, zAortic). It does not write geometry: only λ, the twist and rig.dirty; the
  * geometry stays 1x per frame (applyLvContraction → flushLvField). reset (registration and simulation restart) restarts the driver.
  * Whoever registers it sets rig.driverInStep (and clears it on removal). Allocates only here; step does not allocate.
@@ -2624,7 +2619,7 @@ function buildApparatusTable(rig: LvFieldRig, lamMax: number): void {
  * At the c_i change (allocates the scratch once): at DIV_NL λ nodes ∈ [0, λmax] (+ 1 at the driver's minimum λ, Phase 5b), epicardial positions of the field (without writing to the mesh), envelope
  * grid at the same λ and, at 7 barycentric points of each epicardial triangle, the excess r_mesh − (R_p(y) − recession) at the point's (θ, y); the
  * table keeps the largest excess (≥ 0) per node × y band × 5° column. With c ≡ 1 the table is always the same (cached in the rig).
- * DIAGNOSTICO_VE4D §1: the mesh rises up to 0.48 mm above the grid at end systole (wm1) and up to 1.04 mm at λmax (dyskinetic seg 7).
+ * Measured mesh-to-grid excess reaches up to 0.48 mm at end systole (wm1) and up to 1.04 mm at λmax (dyskinetic seg 7).
  */
 function buildEpiDivergenceTable(rig: LvFieldRig): void {
   const env = rig.envelope;
@@ -2712,7 +2707,7 @@ function buildEpiDivergenceTable(rig: LvFieldRig): void {
 
 // ---------- Phase 4d (D-VE25): AL papillary tip following the apparatus only in part ----------
 
-/** Fraction of the AL tip that follows the apparatus in xz (the rest follows the radial similarity of the endocardium); pre-registered (CRITERIOS_VE4D). */
+/** Fraction of the AL tip that follows the apparatus in xz (the rest follows the radial similarity of the endocardium). */
 export const LV_AL_TIP_APP_FOLLOW = 0.75;
 
 /**
@@ -3145,7 +3140,7 @@ function setupRaPost(skin: AtrialSkinRig): RaPostRig {
 /**
  * Per frame, after the RA skinning (applyAtrialSkinning): each RA vertex with y ≤ top(θ) + m and r < ρ_p(θ, y) + m leaves by the smallest exit
  * (radial to ρ_p + m, or vertical to the top + m), m = RA_LV_MARGIN. Top from the G grid; ρ_p from the envelope grid. If it moved, the RA skin
- * is rewritten on the next frame (the LV may have relaxed). DIAGNOSTICO_VE4C §4.1. No allocation.
+ * is rewritten on the next frame (the LV may have relaxed). No allocation.
  */
 export function applyLvRaPost(rig: LvFieldRig | null): void {
   const post = rig?.raPost;
@@ -3304,7 +3299,7 @@ function setupPapillaries(rig: LvFieldRig, root: THREE.Object3D, valvarData: Val
       pr.az = pr.bz / rb; // (sin θ)
       pr.ay = near.y;
     }
-    // Phase 4b (D-VE19): with the tip following the apparatus, every vertex goes through the safety projection (DIAGNOSTICO_VE4B §3)
+    // Every papillary vertex passes through the safety projection when the tip follows the apparatus
     for (let i = 0; i < n; i++) checks.push(i);
     pr.check = Uint32Array.from(checks);
     // chordae of this papillary muscle (tethers): rest base in parent space

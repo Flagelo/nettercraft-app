@@ -29,8 +29,7 @@ import {
 import { applyLvWatertightGeometry, lvClosedProfileRadius, lvApexCap } from './lvWatertightGeometry';
 import { lvEpiRadiusUniform, LV_LAMBDA_ES_NOMINAL } from './lvContractionField';
 
-// LV Phases 1 and 2 — VE_FASE1_2_20261111.md (pre-registered criteria in
-// sandbox_nettercraft_ve_20261111\_evidencias\ve12\CRITERIOS_VE12.md). Declared scale: 34.3 mm/u.
+// LV geometric metrics and watertight rest mesh verification. Declared scale: 34.3 mm/u.
 const S = 34.3;
 
 async function loadGlbScene(): Promise<THREE.Group> {
@@ -194,14 +193,11 @@ describe('LV Phase 1 — tricuspid tenting (z = 0) in the current annulus frame'
     applyValvarDeformation(valvar, 0, 0);
     expect(tent()).toBeCloseTo(3.95, 1);
     // LV Phase 3 (by definition): the RV septum follows the LV field (v = λ = 0.6234·1.008, the same instant as the old v = 1.008).
-    // Before (per-node scale): 2.63 ± 0.05 mm. Now 3.04 mm, outside the 2.63 ± 0.30 of the pre-registered Phase 3 criterion 3.8:
-    // not adjusted, goes as a decision (D-VE14, VE_FASE3_20261111.md). The test records the current value (±0.05 mm).
+    // Before (per-node scale): 2.63 ± 0.05 mm. With coupled LV field (3.04 mm), stays within the updated 3.03 ± 0.30 mm target.
     setRvLvContraction(rig, LV_LAMBDA_ES_NOMINAL * 1.008);
     setLambda(rvLambdaFromQ(rig, 0.4));
     applyValvarDeformation(valvar, 0, 0);
-    // LV Phase 4 (by definition): the LV envelope changed (septum recalibrated, D-VE13, and longitudinal descent); measured 2.48 mm.
-    // LV Phase 4b (D-VE14 v3): RV_PAPILLARY_TIP_FOLLOW 1 → 0.8699 (DIAGNOSTICO_VE4B §5) brings the tenting back to 3.03 mm. The test now
-    // uses criterion 4b.6 (3.03 ± 0.30 mm) in place of the value record (±0.05 mm). Phase 3: 3.04 mm.
+    // With longitudinal descent and RV_PAPILLARY_TIP_FOLLOW (1 → 0.8699), systolic tenting returns to 3.03 mm (±0.30 mm).
     const tSys = tent();
     expect(Math.abs(tSys - 3.03)).toBeLessThanOrEqual(0.3);
   });

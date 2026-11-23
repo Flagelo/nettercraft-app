@@ -34,10 +34,9 @@ import {
 import chordaMappingRaw from './chorda_topological_mapping.json';
 
 // ============================================================================
-// RV Phase 3: procedural wall (rvGeometryComponent.ts) over the T_TV pose of Phase 2.
-// Criteria (Lang 2015, Table 8; scale D1 = 34.3 mm/unit), measured with rvGeometryMetrics.ts
+// Procedural RV wall over the rigid tricuspid apparatus pose.
+// Criteria (Lang 2015, Table 8; scale 34.3 mm/unit), measured with rvGeometryMetrics.ts
 // in the scene as in the app: geometry swapped on the `right_ventricle` node and tricuspid apparatus posed.
-// Reports: VD_FASE3_20261108.md, VD_FASE3B_20261108.md and VD_FASE3C_20261108.md.
 // ============================================================================
 
 const S = 34.3;

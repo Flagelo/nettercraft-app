@@ -6,7 +6,6 @@ import dicomParser from 'dicom-parser';
  * Volumetric Data and WebGL2 Pipeline (NIfTI .nii/.nii.gz via nifti-reader-js & DICOM .dcm series)
  * + 4×4 Affine Transformation Matrix (anisotropy correction in mm), Hounsfield (HU) conversion,
  * 1D Transfer Function (256×1 RGBA) and Netter Labelmaps (Liver Segment VI, IVC, Aorta, Heart, Lungs).
- * Follows `.agents/skills/dicom-nifti-volume-raycaster/SKILL.md` and Prompt 8.
  */
 
 export interface AnatomicalLabelInfo {

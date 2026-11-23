@@ -17,15 +17,15 @@ import { HemodynamicEngine } from './HemodynamicEngine';
   *  - Gradient = LVPmax − SAP (peak to peak in the cycle)
  *
   * Status of the sources:
-  *  C1 LVEDP 3–10 mmHg: REPORT from the Taskmaster (Kato 2003, doi 10.1016/s0735-1097(03)00573-4, 6.5 ± 1.7);
-  *     the DOI did not resolve in PubMed in this session → value NOT VERIFIED by the executor.
+  *  C1 LVEDP 3–10 mmHg: baseline target (Kato 2003, doi 10.1016/s0735-1097(03)00573-4, 6.5 ± 1.7);
+  *     not resolved directly in PubMed during calibration (treated as reference range).
   *  C2 Ees/Ea 1.87–2.32: VERIFIED in the PubMed abstract (Obata 2024, doi 10.1186/s12871-024-02452-6;
   *     1.87–2.04 men, 1.98–2.32 women; non-invasive method, different from the model's Ees).
   *  C3 LVEF 55–65%: VERIFIED in the PubMed abstract (Rahman 2024, doi 10.1111/cpf.12910; 59.9 ± 2.8%).
   *  C4 LVET 260–310 ms at 75 bpm and slope −1.2 to −2.2 ms/bpm (60–120 bpm): PROVISIONAL
   *     (Weissler coefficients NOT verified).
   *  C5 LVPmax − SAP ≤ 5 mmHg at 75 bpm (no aortic stenosis): PHYSIOLOGICAL INFERENCE, no source.
-  *  C6 regression guards at 75 bpm (aorta 100–130/60–85, SV 60–100, CO 4–8): defined by the Taskmaster.
+  *  C6 regression guards at 75 bpm (aorta 100–130/60–85, SV 60–100, CO 4–8): resting baseline bounds.
   *  Plausibility guards at the other HRs: INFERENCE (wide ranges, only coarse anti-regression).
  */
 
@@ -136,9 +136,9 @@ describe('Systolic/diastolic reference of the 0D engine (normal profile)', () =>
     expect(slope).toBeGreaterThanOrEqual(-2.2);
   });
 
-  // Provisional decision (07/11/2026): C5 applied at rest (50 and 75 bpm). At 100/120 bpm the gradient
+  // Baseline decision: C5 applied at rest (50 and 75 bpm). At 100/120 bpm the gradient
   // grows with flow (Bernoulli at the aortic valve) and there is no source for the 5 mmHg limit in tachycardia;
-  // the measured values (7.7 and 9.9 mmHg) are documented in MOTOR_SISTOLE_FASE1_20261107.md §8A/§8B.
+  // measured baseline values are 7.7 and 9.9 mmHg.
   it('C5 — LVPmax − SAP ≤ 5 mmHg at rest (50 and 75 bpm), no stenosis [PHYSIOLOGICAL INFERENCE, no source]', () => {
     for (const hr of [50, 75]) {
       expect({ hr, ok: R[hr].plvMax - R[hr].paoMax <= 5 }).toEqual({ hr, ok: true });

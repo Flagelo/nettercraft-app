@@ -3,7 +3,7 @@ import { lvEnvelopeRadius, LV_ANALYTIC_PROFILE } from './rvGeometryMetrics';
 import { GLTF_SCALE_MM_PER_UNIT } from './valvarKinematics';
 
 // ============================================================================
-// Phase 4d: atrial skinning (Option B of the AV plan; report VD_FASE4D_20261108.md)
+// Atrial skinning coupled to the atrioventricular annulus plane
 // ----------------------------------------------------------------------------
 // The atrium follows the atrioventricular annulus in systole. The code receives the annulus field as a matrix S
 // (x' = S·x, in parent space) and the anchors as a list of meshes: for Option A (mitral annulus and LA) it is enough to

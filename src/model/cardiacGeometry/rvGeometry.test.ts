@@ -18,8 +18,7 @@ import { applyRvProceduralGeometry } from './rvGeometry';
 import { RV_COMPONENT_WEIGHTS, setupRvContraction, setRvDeformation, solveRvLambda } from './rvContraction';
 
 // ============================================================================
-// SNAPSHOT of the CURRENT state of the RV geometry (Phase 1 of the plan in
-// DIAGNOSTICO_VD_GEOMETRIA_20261107.md, tables 2.3 and 2.4).
+// SNAPSHOT of the baseline RV geometry state (model units, independent of mm/unit scale).
 // Model units (independent of the mm/unit scale). Tolerance: 0.01 unit or exact count.
 // These tests MUST pass on the current code. Asserts marked with
 //   "TARGET Phase N" will be replaced by target criteria when Phase N is implemented

@@ -20,8 +20,7 @@ import {
 } from './lvContractionField';
 import { createRvVolumeTracker, createRvWireframeDriver, rvFillFraction, updateRvVolumeTracker, updateRvWireframe } from './rvContraction';
 
-// LV Phase 5c — torsion driver at the engine 1 ms step (D-VE33), untwisting without a step, RV glow detector (D-VE34).
-// VE_FASE5C_20261113.md; criteria in sandbox_nettercraft_ve_20261111\_evidencias\ve5c\CRITERIOS_VE5C.md.
+// LV torsion driver at the 1 ms engine step, step-invariant untwisting, and RV glow detector.
 
 async function loadGlbScene(): Promise<THREE.Group> {
   const fsMod: any = await import(/* @vite-ignore */ 'f' + 's');

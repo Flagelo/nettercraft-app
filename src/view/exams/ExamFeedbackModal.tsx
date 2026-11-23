@@ -22,6 +22,7 @@ import {
 } from '../../controller/usePhysiologyStore';
 import type { ExamActionOption, ExamCase } from '../../model/exams/examCases';
 import { useCanvas2D } from '../../controller/useRafLoop';
+import { POCUS_ENABLED } from '../pocusModule';
 
 interface ExamFeedbackModalProps {
   examCase: ExamCase;
@@ -197,19 +198,21 @@ export function ExamFeedbackModal({
                     <strong>Gatilho Visual/Fisiológico:</strong>{' '}
                     {disss.deconstruction.imageOrSignalTrigger}
                   </div>
-                  <button
-                    type="button"
-                    className="nc-layer-jump-btn"
-                    onClick={() =>
-                      setSpotlightOverlay({
-                        view: examCase.targetView,
-                        title: `Destaque Patológico — ${examCase.title}`,
-                      })
-                    }
-                  >
-                    <Eye size={13} />
-                    <span>Abrir Overlay com Patologia Destacada</span>
-                  </button>
+                  {(POCUS_ENABLED || examCase.targetView !== 'pocus') && (
+                    <button
+                      type="button"
+                      className="nc-layer-jump-btn"
+                      onClick={() =>
+                        setSpotlightOverlay({
+                          view: examCase.targetView,
+                          title: `Destaque Patológico — ${examCase.title}`,
+                        })
+                      }
+                    >
+                      <Eye size={13} />
+                      <span>Abrir Overlay com Patologia Destacada</span>
+                    </button>
+                  )}
                 </div>
                 <p className="nc-disss-text">{disss.deconstruction.summary}</p>
               </div>
@@ -287,7 +290,8 @@ export function ExamFeedbackModal({
                         {isOpen && (
                           <div className="nc-layer-content">
                             <p>{layer.content}</p>
-                            {layer.quickLinkView && (
+                            {layer.quickLinkView &&
+                              (POCUS_ENABLED || layer.quickLinkView !== 'pocus') && (
                               <div className="nc-layer-actions-row">
                                 <button
                                   type="button"
@@ -384,7 +388,9 @@ export function ExamFeedbackModal({
             onOpenFullViewport={() => {
               const target = spotlightOverlay.view;
               setSpotlightOverlay(null);
-              setView(target);
+              if (POCUS_ENABLED || target !== 'pocus') {
+                setView(target);
+              }
               onCloseModal();
             }}
           />

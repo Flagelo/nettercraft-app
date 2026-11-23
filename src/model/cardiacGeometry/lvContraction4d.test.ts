@@ -38,8 +38,7 @@ import {
 } from './lvContractionField';
 import { setupAtrialSkinning, applyAtrialSkinning, RA_ANCHORS, type AtrialSkinRig } from './atrialSkinning';
 
-// LV Phase 4d — VE_FASE4D_20261112.md; pre-registered criteria in
-// sandbox_nettercraft_ve_20261111\_evidencias\ve4d\CRITERIOS_VE4D.md. Scale: 34.3 mm/u.
+// LV 4D geometry coupling and clearance verification. Scale: 34.3 mm/u.
 const S = 34.3;
 const Q_ES = 1 - 0.6234;
 const SCEN: Array<[string, (i: number) => number]> = [
@@ -112,7 +111,7 @@ function pose(w: World, lam: number, rvQ: number | null, z: number) {
   applyLvAtrium(w.lv, 1);
 }
 
-// ---------- triangulated LV epicardial shell and inside test (+x ray and 3 directions; same definition as CRITERIOS_VE4D 4d.2) ----------
+// ---------- triangulated LV epicardial shell and inside test (+x ray and 3 directions) ----------
 
 function epiShell(ss: THREE.Mesh[]): Float64Array {
   const out: number[] = [];
@@ -197,7 +196,7 @@ function rvInsideMesh(w: World): { inside: number; discord: number } {
   return { inside, discord };
 }
 
-/** Minimum clearance of the AL tip (DIAGNOSTICO_VE4C.md §5): axis = rest PCA, 10 slices, min(ρ_n − r) at the last (mm). */
+/** Minimum clearance of the AL tip: axis = rest PCA, 10 slices, min(ρ_n − r) at the last (mm). */
 function alFrame(rest: Float64Array): Int32Array {
   const n = rest.length / 3;
   let cx = 0, cy = 0, cz = 0;

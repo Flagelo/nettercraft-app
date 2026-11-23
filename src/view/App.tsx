@@ -5,7 +5,7 @@ import { physiologySystems } from '../controller/modules/hemodynamicsModule';
 import { electroSystems } from '../controller/modules/electrophysiologyModule';
 import { audioSystems } from '../controller/modules/auscultationModule';
 import { CardiacViewport } from './cardiac3d';
-import { PocusViewport } from './pocusModule';
+import { POCUS_ENABLED, PocusViewport } from './pocusModule';
 import { RadiologyViewport } from './radiology';
 import { ExamChallengeHub, ExamSidebar } from './exams';
 import { TopBar } from './layout/TopBar';
@@ -39,8 +39,8 @@ export function App() {
     return () => loop.stop();
   }, []);
 
-  // Step 2: When view === 'hub', renders the ArtCraft Launcher 100vw x 100vh without cardiac bars
-  if (view === 'hub') {
+  // Step 2: When view === 'hub' (or 'pocus' while PocusCraft is disabled), renders the ArtCraft Launcher 100vw x 100vh without cardiac bars
+  if (view === 'hub' || (!POCUS_ENABLED && view === 'pocus')) {
     return <HubBentoGrid />;
   }
 
@@ -86,7 +86,7 @@ export function App() {
         <div className="nc-stage-column">
           <main className="nc-stage">
             {view === 'cardio' && <CardiacViewport />}
-            {view === 'pocus' && <PocusViewport />}
+            {POCUS_ENABLED && view === 'pocus' && <PocusViewport />}
             {view === 'radiology' && <RadiologyViewport />}
             {view === 'exam_mode' && <ExamChallengeHub />}
           </main>

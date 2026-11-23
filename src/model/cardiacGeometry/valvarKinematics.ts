@@ -14,7 +14,6 @@ export function setTricuspidTentingTransformEnabled(enabled: boolean): void {
 }
 
 // Global GLB scale: 34.3 mm/unit based on the male LVEDD of 50.2 mm over 1.4622 units (Lang 2015, Table 2, doi: 10.1016/j.echo.2014.10.003).
-// See report VD_FASE0_FASE1_20261107.md and decision D1.
 export const GLTF_SCALE_MM_PER_UNIT = 34.3;
 
 // Coaptation thresholds ("closed") in model units, preserving the behavior and classification of the original model (2.5 mm and 3.5 mm on the historical 55 mm/unit scale):
@@ -55,8 +54,8 @@ export interface LeafletSpec {
 }
 
 /**
- * D17, Option 2: closure geometry of the AV valves. Lengths in mm.
- * Values defined in the sweep of VALVAS_AV_FECHAMENTO_20261109.md; they do not come from the literature.
+ * Closure geometry of the AV valves. Lengths in mm.
+ * Tuned empirical parameters for coaptation clearance and leaflet overlap.
  */
 export const VALVAR_COAPTATION = {
   /** fraction of the column length that forms the coaptation zone */

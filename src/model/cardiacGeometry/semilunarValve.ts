@@ -22,8 +22,7 @@ export type SemilunarValveType = 'aortic' | 'pulmonary';
 
 /**
  * Proportions in multiples of the fitted root radius R.
- * PROVISIONAL VALUES: pending anatomical reference (PubMed), per
- * DIAGNOSTICO_VALVAS_3D_20261107.md §7. Adjust here, in a single place.
+ * Provisional anatomical ratios; adjust here in a single place.
  */
 export interface SemilunarSpec {
   /** Height of the commissures above the cusp nadir (× R). */

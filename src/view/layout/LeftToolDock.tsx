@@ -10,6 +10,7 @@ import {
   Sliders,
 } from 'lucide-react';
 import { usePhysiologyStore, type ViewId } from '../../controller/usePhysiologyStore';
+import { POCUS_ENABLED } from '../pocusModule';
 
 interface DockItem {
   id: ViewId;
@@ -70,6 +71,7 @@ export function LeftToolDock() {
   const requestReset = usePhysiologyStore((s) => s.requestReset);
 
   const handleSelectView = (targetView: ViewId) => {
+    if (!POCUS_ENABLED && targetView === 'pocus') return;
     if (targetView !== 'exam_mode' && activeExamCaseId !== null) {
       // Clicking any Sandbox tool ends Exam Mode and returns full freedom
       exitExamMode(false);
@@ -77,10 +79,14 @@ export function LeftToolDock() {
     setView(targetView);
   };
 
+  const visibleDockViews = POCUS_ENABLED
+    ? DOCK_VIEWS
+    : DOCK_VIEWS.filter((item) => item.id !== 'pocus');
+
   return (
     <nav className="nc-left-dock" aria-label="Dock de Ferramentas e Módulos">
       <div className="nc-dock-section">
-        {DOCK_VIEWS.map((item) => {
+        {visibleDockViews.map((item) => {
           const Icon = item.icon;
           const isExamBtn = item.id === 'exam_mode';
           const active =
