@@ -1,0 +1,23 @@
+{
+  "_origem": "Decisão D18 — Redimensionamento na carga dos folhetos e cordas tricúspides (10/11/2026) sobre public/models/realistic_heart.glb (SHA-256 3552099323FCAA51BCF28E5F5C7726AFA56D91C8CF43C921514B99EE6B54DCE4). Lido por src/model/cardiacGeometry/valvarKinematics.ts. Relatório: TENDA_TRICUSPIDE_20261110.md",
+  "_definicao": "Transformação aplicada na carga antes da construção do campo de coaptação (buildCoaptationField): (1) escalona radialmente a superfície média mid(g, k) de cada folheto tricúspide a partir da dobradiça fixa mid(g, 0) preservando a meia-espessura física off(g, k); (2) interpola suavemente os vértices de repouso das 18 cordas tricúspides ao longo do eixo original baseRestPos -> tipRestPos para acompanhar a nova posição de inserção leafletVIdx no folheto escalonado (preservando o tipOffset do GLB); (3) atribui a b.restLen das cordas tricúspides o comprimento livre de carga anatômico L0 da literatura (em unidades do modelo, 34,3 mm/unidade), eliminando o puxão artificial imposto pelos segmentos curtos abertos (z = 1) do GLB.",
+  "_referencias": {
+    "tendaTricuspide": "Topilsky et al. 2012, Circ Cardiovasc Imaging 5(3):314-323, doi:10.1161/CIRCIMAGING.111.967919 (3,5 ± 1,0 mm)",
+    "alturaRadialFolhetos": "Skwarek et al. 2006, Folia Morphol (Warsz) 65(3):200-208, PMID:16989185 (anterior 20,71 ± 5,23 mm; posterior 18,88 ± 4,66 mm; septal 17,22 ± 4,71 mm)",
+    "comprimentoCordas": "Pokutta-Paskaleva et al. 2019, Acta Biomater 85:241-252, doi:10.1016/j.actbio.2018.12.029 (anterior marginal 12,3 ± 0,6 / basal 13,7 ± 0,4 mm; posterior basal 12,0 ± 0,3 mm; septal marginal 10,0 ± 3,0 / basal 11,0 ± 0,2 mm)",
+    "anelTricuspide": "Addetia et al. 2017, JACC Cardiovasc Imaging 11(2):159-169, doi:10.1016/j.jcmg.2017.08.022 (diâmetro 36 ± 4 mm vs 19,98 mm na linha média do GLB)",
+    "coordenadas3DPontasPapilares": "PENDÊNCIA na literatura consultada (mantidas nos valores do GLB)"
+  },
+  "version": 1,
+  "leafletRadialScale": {
+    "tricuspid_anterior_leaflet": 1.11,
+    "tricuspid_posterior_leaflet": 1.14,
+    "tricuspid_septal_leaflet": 1.25
+  },
+  "chordRestLengthMmByLeaflet": {
+    "tricuspid_anterior_leaflet": 13.0,
+    "tricuspid_posterior_leaflet": 12.0,
+    "tricuspid_septal_leaflet": 10.5
+  },
+  "stretchChordMeshToScaledLeafletInRest": true
+}

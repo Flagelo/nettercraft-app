@@ -1,0 +1,11 @@
+# Documentary bytes and historical whitespace are deliberately preserved.
+docs/** -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+.github/** text eol=lf
+/README.md text eol=lf
+/CONTRIBUTING.md text eol=lf
+/AGENTS.md text eol=lf
+/CLAUDE.md text eol=lf
+/GEMINI.md text eol=lf
+/.gitignore text eol=lf
+/.gitattributes text eol=lf
+scripts/verify_shared_memory.mjs text eol=lf

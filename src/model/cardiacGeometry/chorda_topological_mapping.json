@@ -1,0 +1,872 @@
+[
+  {
+    "index": 1,
+    "chordaName": "mitral_anterolateral_chorda_1",
+    "chamber": "VE (Mitral)",
+    "papillaryName": "mitral_anterolateral_papillary_muscle",
+    "baseIdx": 88,
+    "baseRestPos": {
+      "x": 0.517212986946106,
+      "y": 0.3340507745742798,
+      "z": 0.03492889925837517
+    },
+    "basePapGap": 0.0016120602754530874,
+    "leafletName": "mitral_anterior_leaflet",
+    "leafletVIdx": 46,
+    "tipIdx": 469,
+    "tipRestPos": {
+      "x": 0.4190986752510071,
+      "y": 0.5250337719917297,
+      "z": 0.014344562776386738
+    },
+    "tipLeafletGap": 0.012723850756653802,
+    "offsetVector": {
+      "x": -0.011439621448516846,
+      "y": -0.002353191375732422,
+      "z": -0.0050491513684391975
+    },
+    "restLength": 0.215695707816267,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 2,
+    "chordaName": "mitral_anterolateral_chorda_2",
+    "chamber": "VE (Mitral)",
+    "papillaryName": "mitral_anterolateral_papillary_muscle",
+    "baseIdx": 89,
+    "baseRestPos": {
+      "x": 0.5089281797409058,
+      "y": 0.331157922744751,
+      "z": 0.03380761295557022
+    },
+    "basePapGap": 0.00285696033908302,
+    "leafletName": "mitral_anterior_leaflet",
+    "leafletVIdx": 93,
+    "tipIdx": 473,
+    "tipRestPos": {
+      "x": 0.37217509746551514,
+      "y": 0.5029473900794983,
+      "z": 0.015649449080228806
+    },
+    "tipLeafletGap": 0.01185525406912171,
+    "offsetVector": {
+      "x": 0.0075836181640625,
+      "y": 0.008036255836486816,
+      "z": -0.004295855760574341
+    },
+    "restLength": 0.22032418277234056,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 3,
+    "chordaName": "mitral_anterolateral_chorda_3",
+    "chamber": "VE (Mitral)",
+    "papillaryName": "mitral_anterolateral_papillary_muscle",
+    "baseIdx": 95,
+    "baseRestPos": {
+      "x": 0.49630171060562134,
+      "y": 0.31974053382873535,
+      "z": 0.02485775761306286
+    },
+    "basePapGap": 0.003693881182031743,
+    "leafletName": "mitral_anterior_leaflet",
+    "leafletVIdx": 590,
+    "tipIdx": 474,
+    "tipRestPos": {
+      "x": 0.30113497376441956,
+      "y": 0.46625393629074097,
+      "z": -0.008806989528238773
+    },
+    "tipLeafletGap": 0.014179105158851561,
+    "offsetVector": {
+      "x": 0.0022573769092559814,
+      "y": 0.007047384977340698,
+      "z": 0.012094859965145588
+    },
+    "restLength": 0.24635248622720315,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 4,
+    "chordaName": "mitral_anterolateral_chorda_4",
+    "chamber": "VE (Mitral)",
+    "papillaryName": "mitral_anterolateral_papillary_muscle",
+    "baseIdx": 83,
+    "baseRestPos": {
+      "x": 0.5178038477897644,
+      "y": 0.33166050910949707,
+      "z": 0.03342505171895027
+    },
+    "basePapGap": 0.004005525208748585,
+    "leafletName": "mitral_posterior_leaflet",
+    "leafletVIdx": 398,
+    "tipIdx": 470,
+    "tipRestPos": {
+      "x": 0.5222892165184021,
+      "y": 0.6043118834495544,
+      "z": -0.05545146018266678
+    },
+    "tipLeafletGap": 0.006560061070847603,
+    "offsetVector": {
+      "x": -0.0045146942138671875,
+      "y": 0.003705918788909912,
+      "z": 0.002986319363117218
+    },
+    "restLength": 0.2868064239691158,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 5,
+    "chordaName": "mitral_anterolateral_chorda_5",
+    "chamber": "VE (Mitral)",
+    "papillaryName": "mitral_anterolateral_papillary_muscle",
+    "baseIdx": 76,
+    "baseRestPos": {
+      "x": 0.5312386155128479,
+      "y": 0.3270755708217621,
+      "z": 0.020258726552128792
+    },
+    "basePapGap": 0.004396046722242292,
+    "leafletName": "mitral_posterior_leaflet",
+    "leafletVIdx": 349,
+    "tipIdx": 470,
+    "tipRestPos": {
+      "x": 0.5415919423103333,
+      "y": 0.5898656845092773,
+      "z": -0.15028886497020721
+    },
+    "tipLeafletGap": 0.007311188358848909,
+    "offsetVector": {
+      "x": -0.002935469150543213,
+      "y": 0.004663527011871338,
+      "z": 0.0048049986362457275
+    },
+    "restLength": 0.31345225505927105,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 6,
+    "chordaName": "mitral_anterolateral_chorda_6",
+    "chamber": "VE (Mitral)",
+    "papillaryName": "mitral_anterolateral_papillary_muscle",
+    "baseIdx": 83,
+    "baseRestPos": {
+      "x": 0.5268396735191345,
+      "y": 0.33118167519569397,
+      "z": 0.019374212250113487
+    },
+    "basePapGap": 0.0016376401843142723,
+    "leafletName": "mitral_posterior_leaflet",
+    "leafletVIdx": 285,
+    "tipIdx": 468,
+    "tipRestPos": {
+      "x": 0.5090914368629456,
+      "y": 0.5990849733352661,
+      "z": -0.26162880659103394
+    },
+    "tipLeafletGap": 0.011925676133150528,
+    "offsetVector": {
+      "x": -0.001249074935913086,
+      "y": -0.003947854042053223,
+      "z": 0.011183738708496094
+    },
+    "restLength": 0.3886513523150316,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 7,
+    "chordaName": "mitral_posteromedial_chorda_1",
+    "chamber": "VE (Mitral)",
+    "papillaryName": "mitral_posteromedial_papillary_muscle",
+    "baseIdx": 89,
+    "baseRestPos": {
+      "x": 0.06351350247859955,
+      "y": 0.326675146818161,
+      "z": -0.24127860367298126
+    },
+    "basePapGap": 0.0023130129968762635,
+    "leafletName": "mitral_anterior_leaflet",
+    "leafletVIdx": 398,
+    "tipIdx": 473,
+    "tipRestPos": {
+      "x": 0.10682762414216995,
+      "y": 0.5183120965957642,
+      "z": -0.17591127753257751
+    },
+    "tipLeafletGap": 0.01265643810098561,
+    "offsetVector": {
+      "x": 0.009682178497314453,
+      "y": -0.001782834529876709,
+      "z": 0.007953763008117676
+    },
+    "restLength": 0.20705970390758333,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 8,
+    "chordaName": "mitral_posteromedial_chorda_2",
+    "chamber": "VE (Mitral)",
+    "papillaryName": "mitral_posteromedial_papillary_muscle",
+    "baseIdx": 93,
+    "baseRestPos": {
+      "x": 0.07074256241321564,
+      "y": 0.3263131380081177,
+      "z": -0.24573488533496857
+    },
+    "basePapGap": 0.00228214277965637,
+    "leafletName": "mitral_anterior_leaflet",
+    "leafletVIdx": 349,
+    "tipIdx": 469,
+    "tipRestPos": {
+      "x": 0.12792186439037323,
+      "y": 0.49762508273124695,
+      "z": -0.13316553831100464
+    },
+    "tipLeafletGap": 0.011809885336341789,
+    "offsetVector": {
+      "x": 0.000057756900787353516,
+      "y": 0.007891654968261719,
+      "z": -0.00878588855266571
+    },
+    "restLength": 0.21281238889880705,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 9,
+    "chordaName": "mitral_posteromedial_chorda_3",
+    "chamber": "VE (Mitral)",
+    "papillaryName": "mitral_posteromedial_papillary_muscle",
+    "baseIdx": 91,
+    "baseRestPos": {
+      "x": 0.07429755479097366,
+      "y": 0.31889060139656067,
+      "z": -0.2375510334968567
+    },
+    "basePapGap": 0.00137138291136506,
+    "leafletName": "mitral_anterior_leaflet",
+    "leafletVIdx": 286,
+    "tipIdx": 468,
+    "tipRestPos": {
+      "x": 0.1832023411989212,
+      "y": 0.4636749029159546,
+      "z": -0.08020806312561035
+    },
+    "tipLeafletGap": 0.014198273480678302,
+    "offsetVector": {
+      "x": -0.0013379305601119995,
+      "y": 0.011256992816925049,
+      "z": -0.008548744022846222
+    },
+    "restLength": 0.2399574062084068,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 10,
+    "chordaName": "mitral_posteromedial_chorda_4",
+    "chamber": "VE (Mitral)",
+    "papillaryName": "mitral_posteromedial_papillary_muscle",
+    "baseIdx": 94,
+    "baseRestPos": {
+      "x": 0.06765305995941162,
+      "y": 0.33425724506378174,
+      "z": -0.25591179728507996
+    },
+    "basePapGap": 0.004071208523458289,
+    "leafletName": "mitral_posterior_leaflet",
+    "leafletVIdx": 46,
+    "tipIdx": 472,
+    "tipRestPos": {
+      "x": 0.11918918043375015,
+      "y": 0.5953657031059265,
+      "z": -0.30113622546195984
+    },
+    "tipLeafletGap": 0.006532144127978404,
+    "offsetVector": {
+      "x": -0.0007388368248939514,
+      "y": 0.0036589503288269043,
+      "z": 0.005360513925552368
+    },
+    "restLength": 0.26996082582222514,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 11,
+    "chordaName": "mitral_posteromedial_chorda_5",
+    "chamber": "VE (Mitral)",
+    "papillaryName": "mitral_posteromedial_papillary_muscle",
+    "baseIdx": 87,
+    "baseRestPos": {
+      "x": 0.06792128086090088,
+      "y": 0.33095312118530273,
+      "z": -0.2671314775943756
+    },
+    "basePapGap": 0.0043405776848727965,
+    "leafletName": "mitral_posterior_leaflet",
+    "leafletVIdx": 93,
+    "tipIdx": 472,
+    "tipRestPos": {
+      "x": 0.19505707919597626,
+      "y": 0.582046627998352,
+      "z": -0.3615785539150238
+    },
+    "tipLeafletGap": 0.00715004585070915,
+    "offsetVector": {
+      "x": -0.003142908215522766,
+      "y": 0.004419386386871338,
+      "z": 0.004659861326217651
+    },
+    "restLength": 0.2968698546627632,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 12,
+    "chordaName": "mitral_posteromedial_chorda_6",
+    "chamber": "VE (Mitral)",
+    "papillaryName": "mitral_posteromedial_papillary_muscle",
+    "baseIdx": 80,
+    "baseRestPos": {
+      "x": 0.07119670510292053,
+      "y": 0.3255845904350281,
+      "z": -0.2570912837982178
+    },
+    "basePapGap": 0.0042246610204829315,
+    "leafletName": "mitral_posterior_leaflet",
+    "leafletVIdx": 157,
+    "tipIdx": 474,
+    "tipRestPos": {
+      "x": 0.30851462483406067,
+      "y": 0.5944247841835022,
+      "z": -0.3839261531829834
+    },
+    "tipLeafletGap": 0.012074295483436623,
+    "offsetVector": {
+      "x": -0.009365588426589966,
+      "y": -0.004398465156555176,
+      "z": 0.006223171949386597
+    },
+    "restLength": 0.38037077817845516,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 13,
+    "chordaName": "tricuspid_anterior_chorda_1",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_anterior_papillary_muscle",
+    "baseIdx": 81,
+    "baseRestPos": {
+      "x": -0.7071235179901123,
+      "y": 0.2624635696411133,
+      "z": 0.2992825210094452
+    },
+    "basePapGap": 0.00231004984878298,
+    "leafletName": "tricuspid_anterior_leaflet",
+    "leafletVIdx": 380,
+    "tipIdx": 474,
+    "tipRestPos": {
+      "x": -0.7284133434295654,
+      "y": 0.4451694190502167,
+      "z": 0.38270705938339233
+    },
+    "tipLeafletGap": 0.013113744055573001,
+    "offsetVector": {
+      "x": -0.004900157451629639,
+      "y": -0.0023754239082336426,
+      "z": -0.011929631233215332
+    },
+    "restLength": 0.20197608194647834,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 14,
+    "chordaName": "tricuspid_anterior_chorda_2",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_anterior_papillary_muscle",
+    "baseIdx": 82,
+    "baseRestPos": {
+      "x": -0.7076787948608398,
+      "y": 0.2609494924545288,
+      "z": 0.30113735795021057
+    },
+    "basePapGap": 0.001966964830920939,
+    "leafletName": "tricuspid_anterior_leaflet",
+    "leafletVIdx": 781,
+    "tipIdx": 475,
+    "tipRestPos": {
+      "x": -0.6652871370315552,
+      "y": 0.3918750286102295,
+      "z": 0.3971861004829407
+    },
+    "tipLeafletGap": 0.011816524534386329,
+    "offsetVector": {
+      "x": 0.006520211696624756,
+      "y": -0.005160987377166748,
+      "z": 0.00839531421661377
+    },
+    "restLength": 0.16782106427171625,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 15,
+    "chordaName": "tricuspid_anterior_chorda_3",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_anterior_papillary_muscle",
+    "baseIdx": 91,
+    "baseRestPos": {
+      "x": -0.6925076246261597,
+      "y": 0.25215965509414673,
+      "z": 0.3076995015144348
+    },
+    "basePapGap": 0.00235771494122318,
+    "leafletName": "tricuspid_anterior_leaflet",
+    "leafletVIdx": 718,
+    "tipIdx": 479,
+    "tipRestPos": {
+      "x": -0.6033387184143066,
+      "y": 0.3392598628997803,
+      "z": 0.39977356791496277
+    },
+    "tipLeafletGap": 0.012510544337522238,
+    "offsetVector": {
+      "x": -0.007745623588562012,
+      "y": 0.005380690097808838,
+      "z": 0.008219927549362183
+    },
+    "restLength": 0.15496829913995835,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 16,
+    "chordaName": "tricuspid_anterior_chorda_4",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_anterior_papillary_muscle",
+    "baseIdx": 82,
+    "baseRestPos": {
+      "x": -0.713226854801178,
+      "y": 0.2625127136707306,
+      "z": 0.2954631447792053
+    },
+    "basePapGap": 0.0017811815750048855,
+    "leafletName": "tricuspid_posterior_leaflet",
+    "leafletVIdx": 60,
+    "tipIdx": 468,
+    "tipRestPos": {
+      "x": -0.7874448299407959,
+      "y": 0.4663894772529602,
+      "z": 0.2900378108024597
+    },
+    "tipLeafletGap": 0.00908800158135571,
+    "offsetVector": {
+      "x": 0.007297396659851074,
+      "y": -0.0027568936347961426,
+      "z": 0.004662543535232544
+    },
+    "restLength": 0.21703335414481462,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 17,
+    "chordaName": "tricuspid_anterior_chorda_5",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_anterior_papillary_muscle",
+    "baseIdx": 78,
+    "baseRestPos": {
+      "x": -0.7155667543411255,
+      "y": 0.2608061134815216,
+      "z": 0.30079877376556396
+    },
+    "basePapGap": 0.0018115819896437784,
+    "leafletName": "tricuspid_posterior_leaflet",
+    "leafletVIdx": 540,
+    "tipIdx": 479,
+    "tipRestPos": {
+      "x": -0.773880124092102,
+      "y": 0.4212847352027893,
+      "z": 0.2384127825498581
+    },
+    "tipLeafletGap": 0.010824918401109886,
+    "offsetVector": {
+      "x": -0.005172371864318848,
+      "y": -0.008471399545669556,
+      "z": 0.004319816827774048
+    },
+    "restLength": 0.18178517272109398,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 18,
+    "chordaName": "tricuspid_anterior_chorda_6",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_anterior_papillary_muscle",
+    "baseIdx": 79,
+    "baseRestPos": {
+      "x": -0.7121077179908752,
+      "y": 0.2594388425350189,
+      "z": 0.29065483808517456
+    },
+    "basePapGap": 0.004363234865898641,
+    "leafletName": "tricuspid_posterior_leaflet",
+    "leafletVIdx": 574,
+    "tipIdx": 475,
+    "tipRestPos": {
+      "x": -0.7561028003692627,
+      "y": 0.3743278980255127,
+      "z": 0.19556555151939392
+    },
+    "tipLeafletGap": 0.008742223849234652,
+    "offsetVector": {
+      "x": -0.004626154899597168,
+      "y": -0.0019700825214385986,
+      "z": -0.007151499390602112
+    },
+    "restLength": 0.1554896612787101,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 19,
+    "chordaName": "tricuspid_posterior_chorda_1",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_posterior_papillary_muscle",
+    "baseIdx": 60,
+    "baseRestPos": {
+      "x": -0.6134136915206909,
+      "y": 0.32851776480674744,
+      "z": 0.004189763218164444
+    },
+    "basePapGap": 0.0022543749831142133,
+    "leafletName": "tricuspid_posterior_leaflet",
+    "leafletVIdx": 380,
+    "tipIdx": 474,
+    "tipRestPos": {
+      "x": -0.6846525073051453,
+      "y": 0.4811641573905945,
+      "z": -0.003054677974432707
+    },
+    "tipLeafletGap": 0.009320373803924663,
+    "offsetVector": {
+      "x": 0.008684933185577393,
+      "y": -0.0033647119998931885,
+      "z": 0.00034643406979739666
+    },
+    "restLength": 0.168607152788446,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 20,
+    "chordaName": "tricuspid_posterior_chorda_2",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_posterior_papillary_muscle",
+    "baseIdx": 78,
+    "baseRestPos": {
+      "x": -0.6287479996681213,
+      "y": 0.3255678415298462,
+      "z": 0.016094358637928963
+    },
+    "basePapGap": 0.0018803695291302743,
+    "leafletName": "tricuspid_posterior_leaflet",
+    "leafletVIdx": 781,
+    "tipIdx": 476,
+    "tipRestPos": {
+      "x": -0.7006608843803406,
+      "y": 0.43326470255851746,
+      "z": 0.039752401411533356
+    },
+    "tipLeafletGap": 0.0072739625133561945,
+    "offsetVector": {
+      "x": -0.006244957447052002,
+      "y": -0.0027582943439483643,
+      "z": 0.002510547637939453
+    },
+    "restLength": 0.13164262171097765,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 21,
+    "chordaName": "tricuspid_posterior_chorda_3",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_posterior_papillary_muscle",
+    "baseIdx": 60,
+    "baseRestPos": {
+      "x": -0.6266366839408875,
+      "y": 0.3246154189109802,
+      "z": 0.013887455686926842
+    },
+    "basePapGap": 0.0013942487559390994,
+    "leafletName": "tricuspid_posterior_leaflet",
+    "leafletVIdx": 302,
+    "tipIdx": 468,
+    "tipRestPos": {
+      "x": -0.7206413745880127,
+      "y": 0.3817453384399414,
+      "z": 0.0800691768527031
+    },
+    "tipLeafletGap": 0.01004670039986234,
+    "offsetVector": {
+      "x": 0.001647353172302246,
+      "y": 0.00301167368888855,
+      "z": 0.009442046284675598
+    },
+    "restLength": 0.12837729466502967,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 22,
+    "chordaName": "tricuspid_posterior_chorda_4",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_posterior_papillary_muscle",
+    "baseIdx": 68,
+    "baseRestPos": {
+      "x": -0.6159033179283142,
+      "y": 0.3288595676422119,
+      "z": 0.0137866772711277
+    },
+    "basePapGap": 0.0027119986771081414,
+    "leafletName": "tricuspid_septal_leaflet",
+    "leafletVIdx": 46,
+    "tipIdx": 468,
+    "tipRestPos": {
+      "x": -0.5809217691421509,
+      "y": 0.5000423789024353,
+      "z": -0.04304832965135574
+    },
+    "tipLeafletGap": 0.013460409442126477,
+    "offsetVector": {
+      "x": 0.011527836322784424,
+      "y": -0.0006842613220214844,
+      "z": 0.006915446370840073
+    },
+    "restLength": 0.1837320920207211,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 23,
+    "chordaName": "tricuspid_posterior_chorda_5",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_posterior_papillary_muscle",
+    "baseIdx": 69,
+    "baseRestPos": {
+      "x": -0.6075034737586975,
+      "y": 0.3272334039211273,
+      "z": 0.014483287930488586
+    },
+    "basePapGap": 0.001941722598950683,
+    "leafletName": "tricuspid_septal_leaflet",
+    "leafletVIdx": 525,
+    "tipIdx": 476,
+    "tipRestPos": {
+      "x": -0.5328234434127808,
+      "y": 0.4628492593765259,
+      "z": -0.025096990168094635
+    },
+    "tipLeafletGap": 0.006653898900673666,
+    "offsetVector": {
+      "x": -0.0036319494247436523,
+      "y": 0.0027933716773986816,
+      "z": -0.0048249755054712296
+    },
+    "restLength": 0.15979788984128604,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 24,
+    "chordaName": "tricuspid_posterior_chorda_6",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_posterior_papillary_muscle",
+    "baseIdx": 60,
+    "baseRestPos": {
+      "x": -0.5986263751983643,
+      "y": 0.316560298204422,
+      "z": 0.01399944256991148
+    },
+    "basePapGap": 0.001389257913183746,
+    "leafletName": "tricuspid_septal_leaflet",
+    "leafletVIdx": 590,
+    "tipIdx": 475,
+    "tipRestPos": {
+      "x": -0.4619719982147217,
+      "y": 0.41235795617103577,
+      "z": 0.005569326691329479
+    },
+    "tipLeafletGap": 0.012855418242270678,
+    "offsetVector": {
+      "x": -0.0009053647518157959,
+      "y": 0.006440222263336182,
+      "z": -0.01108898688107729
+    },
+    "restLength": 0.1671007985450762,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 25,
+    "chordaName": "tricuspid_septal_chorda_1",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_septal_papillary_muscle",
+    "baseIdx": 5,
+    "baseRestPos": {
+      "x": -0.22806032001972198,
+      "y": 0.22401614487171173,
+      "z": 0.2980756163597107
+    },
+    "basePapGap": 0.0020900233876299267,
+    "leafletName": "tricuspid_septal_leaflet",
+    "leafletVIdx": 846,
+    "tipIdx": 474,
+    "tipRestPos": {
+      "x": -0.29239463806152344,
+      "y": 0.5152872800827026,
+      "z": 0.2623886466026306
+    },
+    "tipLeafletGap": 0.011478265984818548,
+    "offsetVector": {
+      "x": 0.004854381084442139,
+      "y": -0.0034307241439819336,
+      "z": -0.0098191499710083
+    },
+    "restLength": 0.3004186054415501,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 26,
+    "chordaName": "tricuspid_septal_chorda_2",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_septal_papillary_muscle",
+    "baseIdx": 45,
+    "baseRestPos": {
+      "x": -0.23942023515701294,
+      "y": 0.22974659502506256,
+      "z": 0.30915647745132446
+    },
+    "basePapGap": 0.002506798880527393,
+    "leafletName": "tricuspid_septal_leaflet",
+    "leafletVIdx": 365,
+    "tipIdx": 470,
+    "tipRestPos": {
+      "x": -0.2959580421447754,
+      "y": 0.4661502540111542,
+      "z": 0.20586071908473969
+    },
+    "tipLeafletGap": 0.006823329983103101,
+    "offsetVector": {
+      "x": -0.001903146505355835,
+      "y": 0.004785895347595215,
+      "z": 0.004475608468055725
+    },
+    "restLength": 0.26410836279361855,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 27,
+    "chordaName": "tricuspid_septal_chorda_3",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_septal_papillary_muscle",
+    "baseIdx": 48,
+    "baseRestPos": {
+      "x": -0.23233893513679504,
+      "y": 0.23658709228038788,
+      "z": 0.3083447217941284
+    },
+    "basePapGap": 0.0015803740444056593,
+    "leafletName": "tricuspid_septal_leaflet",
+    "leafletVIdx": 334,
+    "tipIdx": 469,
+    "tipRestPos": {
+      "x": -0.31627121567726135,
+      "y": 0.429059773683548,
+      "z": 0.16757473349571228
+    },
+    "tipLeafletGap": 0.012066142240067993,
+    "offsetVector": {
+      "x": -0.002092033624649048,
+      "y": 0.008611023426055908,
+      "z": 0.008189350366592407
+    },
+    "restLength": 0.25279744937159104,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 28,
+    "chordaName": "tricuspid_septal_chorda_4",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_septal_papillary_muscle",
+    "baseIdx": 59,
+    "baseRestPos": {
+      "x": -0.2398821860551834,
+      "y": 0.2327725738286972,
+      "z": 0.30997201800346375
+    },
+    "basePapGap": 0.0006755728255757869,
+    "leafletName": "tricuspid_anterior_leaflet",
+    "leafletVIdx": 462,
+    "tipIdx": 468,
+    "tipRestPos": {
+      "x": -0.3214464783668518,
+      "y": 0.48464685678482056,
+      "z": 0.3310014009475708
+    },
+    "tipLeafletGap": 0.011054257964514447,
+    "offsetVector": {
+      "x": -0.0028724074363708496,
+      "y": -0.0049436986446380615,
+      "z": 0.009460747241973877
+    },
+    "restLength": 0.2655854347323559,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 29,
+    "chordaName": "tricuspid_septal_chorda_5",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_septal_papillary_muscle",
+    "baseIdx": 59,
+    "baseRestPos": {
+      "x": -0.2413932830095291,
+      "y": 0.22976256906986237,
+      "z": 0.3109128773212433
+    },
+    "basePapGap": 0.001786195091709467,
+    "leafletName": "tricuspid_anterior_leaflet",
+    "leafletVIdx": 77,
+    "tipIdx": 472,
+    "tipRestPos": {
+      "x": -0.36079782247543335,
+      "y": 0.41984689235687256,
+      "z": 0.3649030923843384
+    },
+    "tipLeafletGap": 0.006870348621658844,
+    "offsetVector": {
+      "x": 0.0009515285491943359,
+      "y": 0.005681395530700684,
+      "z": -0.003744065761566162
+    },
+    "restLength": 0.23087753751091628,
+    "status": "MAPEADO_CONFIRMADO"
+  },
+  {
+    "index": 30,
+    "chordaName": "tricuspid_septal_chorda_6",
+    "chamber": "VD (Tricúspide)",
+    "papillaryName": "tricuspid_septal_papillary_muscle",
+    "baseIdx": 54,
+    "baseRestPos": {
+      "x": -0.23404909670352936,
+      "y": 0.23656220734119415,
+      "z": 0.31085067987442017
+    },
+    "basePapGap": 0.002009355328218966,
+    "leafletName": "tricuspid_anterior_leaflet",
+    "leafletVIdx": 110,
+    "tipIdx": 472,
+    "tipRestPos": {
+      "x": -0.4026324450969696,
+      "y": 0.36863967776298523,
+      "z": 0.3771990239620209
+    },
+    "tipLeafletGap": 0.007682260670330759,
+    "offsetVector": {
+      "x": 0.0007316768169403076,
+      "y": 0.00693097710609436,
+      "z": -0.003231614828109741
+    },
+    "restLength": 0.22420282404940803,
+    "status": "MAPEADO_CONFIRMADO"
+  }
+]

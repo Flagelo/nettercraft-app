@@ -1,0 +1,55 @@
+# Dependências e build
+node_modules
+dist
+*.tsbuildinfo
+
+# Ambiente e segredos
+.env*
+!.env.example
+*.local
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+secrets*.json
+.agents/local.json
+mcp_config*.json
+
+# Python e ambientes virtuais
+.venv/
+venv/
+.agents/.ollama-rag-venv/
+**/__pycache__/
+*.py[cod]
+
+# Banco local
+*.sqlite*
+
+# Editor e sistema operacional
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Caches, relatórios e materiais de trabalho locais
+.vite
+.cache/
+coverage
+*.log
+*.bak
+backup_*/
+tmp/
+outputs/
+work/
+playwright-report/
+test-results/
+*.zip
+
+# Preservar as evidências AG revisadas; manter depois dos padrões de exclusão.
+!docs/evidencias/reset-antigravity/work/
+!docs/evidencias/reset-antigravity/work/**
+!docs/evidencias/reset-antigravity/outputs/
+!docs/evidencias/reset-antigravity/outputs/**
